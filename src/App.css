@@ -1,0 +1,211 @@
+/* Body Styling */
+.bodysect{
+  margin-top: 75px;
+}
+
+
+
+/**/
+
+
+
+
+/*Carousel Styling*/
+.carouselImage{
+  height:500px;
+}
+
+/* Styling for cards compnent */
+.cardimg{
+   width: 100%;
+    height:250px;
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+  }
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+  }
+  .container-slide {
+    position: relative;
+    object-fit: contain;
+  }
+  .container-slide:hover .image {
+    opacity: 0.3;
+  }
+  .container-slide:hover .middle {
+    opacity: 0.68;
+  }
+
+
+  /* Form Styling */
+.parentTextBox{
+  margin:20px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.textBox{
+  width:35%;
+}
+
+
+
+
+/* Booking Table Styling */
+.bookingTable{
+  color: black !important;
+  background-color: white;
+}
+.tableMods{
+  margin: 20px;
+  width:100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+
+/* Footer styling */
+.footerStyling{
+  bottom: 0;
+  /* position: fixed; */
+  width:80vw;
+
+}
+
+
+
+/* Header styling */
+.headerStyle{
+  display: flex;
+  position: fixed;
+  top:0;
+  width:80vw;
+  z-index: 10;
+  flex-direction: row;
+}
+
+.hammenuStyle{
+  width: 38px;
+  height:50%;
+  align-self: center;
+  position: absolute;
+  right:30px;
+  top:20px;
+  
+}
+
+
+
+@media screen and (max-width: 745px) {
+  /* body{
+    background-color: blueviolet !important;
+    width:100vw;
+  } */
+  .headerStyle{
+    margin: 0, 0;
+    flex-direction: column;
+  }
+
+  .HeaderLinks{
+    margin-top: 0;
+    grid-template-columns: 1fr !important;
+    background-color: rgb(99 199 201);
+    top:-18px;
+    width:100%;
+    height:150%;
+    text-align: center !important;
+    position: relative;
+    
+  }
+
+  .HeaderLinks > img{
+    position: absolute;
+    right: 0;
+  }
+  .optionalNav{
+    display: none !important;
+  }
+
+  .carouselImage{
+    height:450px;
+  }
+  
+}
+
+@media screen and (min-width: 746px) {
+  .hammenuStyle{
+    display: none;
+  }
+  
+}
+
+@media screen and (max-width: 875px) {
+  .grid-container{
+    grid-template-columns: 1fr;
+  }
+  .cardimg{
+     height:300px;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .carouselImage{
+    height:550px;
+  }
+  
+}
+
+@media screen and (min-width: 1360px) {
+  .carouselImage{
+    height:600px;
+  }
+  
+}
+
+@media screen and (min-width: 1760px) {
+  body {
+    width: 70%
+  }
+
+  .carouselImage{
+    height:680px;
+  }
+
+  .headerStyle {
+    width: 70% !important;
+   
+  }
+
+  .footerStyling{
+    width: 100% !important;
+  }
+ 
+}
+
+
+
+

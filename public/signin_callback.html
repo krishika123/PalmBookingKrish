@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <h1>Redirecting...</h1>
+
+        <script src="oidc-client.min.js"></script>
+        <script>
+        new Oidc.UserManager({ response_mode: 'query' })
+        .signinRedirectCallback()
+        .then(function (res) {
+          window.location = '/'
+          console.log('success')
+        })
+        .catch(function (e) {
+          console.error(e)
+        })
+      
+        </script>
+    </body>
+
+
+</html>
