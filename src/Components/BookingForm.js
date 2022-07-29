@@ -6,10 +6,11 @@ import {Form,FormGroup,Label,Input,Button} from 'reactstrap';
 
 
 const initData ={
-    date: '',
-    time: '',
-    hall: '',
-    info: ''
+    eventDate: '',
+    eventTime: '',
+    facilityId: '',
+    additionalInfo: '',
+    facilityName:""
 }
 
 const styles={
@@ -18,124 +19,67 @@ const styles={
     }
 }
 
-// additionalInfo: "Thanks lots"
-// eventDate: "04-12-2022"
-// eventTime: "11:46"
-// facility: null
-// facilityId: "d14dbc48-996d-45b0-ab8c-1df3c9c79ca5"
-// id: "6b49ff91-aa29-4d96-9da9-ee89af7b8ceb"
-// payments: []
-// statusAoD: null
-// user: null
-// userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-// {
-//     "id": "6b49ff91-aa29-4d96-9da9-ee89af7b8ceb",
-//     "userName": "Krishika Mirpuri",
-//     "userEmail": "krish10@gmail.com",
-//     "facilityName": "Mayor Hall",
-//     "facilityDesc": null,
-//     "eventDate": "04-12-2022",
-//     "eventTime": "11:46",
-//     "additionalInfo": "Thanks lots",
-//     "payments": []
-//   }
-const renderResponse = (data) =>{
-    let obj={}
-    obj.date = data.eventDate
-    obj.time = data.eventTime
-    obj.hall = data.facilityId
-    obj.info = data.additionalInfo
-  
-
-    return obj
-
-}
 
 const BookingForm = (props) => {
     const {id} = useParams()
-    console.log({id})
-
-
-
-    // const [bookingname, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [phonenumber, setPhone] = useState('');
-    // const [date, setDate] = useState('');
-    // const [time, setTime] = useState('');
-    // const [hall, setHall] = useState('');
-    // const [info, setInfo] = useState('');
+    //console.log({id})
     const [bookingInfo, setBookingInfo] = useState(initData);
+    const [facilities, setFacilities] = useState([]);
+    const [selectedFacility, setselectedFacility] = useState('')
+   
+
+    const renderResponse = (data) =>{
+        //console.log({data: facilities.find(x => x.name === data.facilityName)?.id, facilities})
+        let obj={...data, facilityId: facilities.find(x => x.name === data.facilityName)?.id}
+        setselectedFacility(obj.facilityName)
+        setBookingInfo(obj)
+    
+    }
+   
     
     const handleChange = (eve) =>{
         setBookingInfo(prev =>({
             ...prev, [eve.target.name]:eve.target.value}))
     }
-    // console.log({bookingInfo})
-
-    // const changeName = (e) => {
-    //     // console.log({e:e.target.value});
-    //     setName (e.target.value);
-    // }
-    // const changeEmail = (e) => {
-    //     setEmail (e.target.value);
-    // }
-    // const changePhone = (e) => {
-    //     setPhone (e.target.value);
-    // }
-    // const changeDate = (e) => {
-    //     setDate (e.target.value);
-    // }
-    // const changeTime = (e) => {
-    //     setTime (e.target.value);
-    // }
-    // const changeHall = (e) => {
-    //     setHall (e.target.value);
-    // }
-    // const changeInfo = (e) => {
-    //     setInfo (e.target.value);}
-
-
-    // function to save bookings
-    // function to update booking
-    /*
-        if id is found perform an update
-        if id is not found, create booking
-    
-    */
+   
     const getBookingInfo = async()=>{
             try {
-                const response = await axios.post(`/Booking/CreateBooking`,bookingInfo)
-                console.log({response})
-                setBookingInfo(renderResponse(response.data[0]))
+                const response = await axios.get(`/Booking/GetBookingBy${id}`)
+                //console.log({response2222: renderResponse(response.data[0])})
+            renderResponse(response.data[0])
             } catch (error) {
                 console.error({response:error})
             }
     }
 
+    const postBookingInfo = async()=>{
+        try {
+            const response = await axios.post(`/Booking/CreateBooking`, bookingInfo)
+            console.log({response})
+        } catch (error) {
+            console.error({response:error})
+        }
+}
+
     const getFacilities = async() => {
         try{
             const result = await axios.get(`/Facility/GetFacilities`)
             console.log({result})
+            setFacilities(result.data)
+
+            if(id){
+                getBookingInfo()
+            }
+           
         }catch (error){
 
         }
     }
 
+   
     const submitData = (e) =>{
         e.preventDefault()
 
-        // result here....
-
-
-        //let objData =bookingInfo
-        
-        // if(!bookingInfo.eventDate){
-        //     alert("Please input a date for your meeting or event.")
-        // } else if(!bookingInfo.eventTime){
-        //     alert("Please input a time for your meeting or event.")
-        // } else if(!bookingInfo.facilityName){
-        //     alert("Please input a location for your meeting or event.")
-        // } 
 
         console.log({bookingInfo})
           //bookingInfo?.bookingname ?   console.log({objData}):alert("just add your name")
@@ -143,25 +87,29 @@ const BookingForm = (props) => {
            bookingInfo.time.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Valid Time.")
            bookingInfo.hall.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Facility.")
 
-           getBookingInfo()
+           postBookingInfo()
            
     }
-
-    useEffect(()=>{
-        getFacilities()
-    },[])
     
 
     useEffect(() => {
 
         if(id){
-            getBookingInfo()
+            getFacilities()
+          
         }
       
       return () => {
         
       }
-    }, [id])
+    }, [id,])
+
+
+    useEffect(() => {
+        console.log({bookingInfo, facilities})
+        console.log("SelectedFacility:", selectedFacility)
+        
+    }, [selectedFacility])
     
 
 
@@ -174,10 +122,10 @@ const BookingForm = (props) => {
             </Label>
             <Input
                 id="exampleDate"
-                name="date"
+                name="eventDate"
                 placeholder="01-10-2022"
-                type="date"
-                value={bookingInfo.date}
+                type="date"            
+                value={bookingInfo.eventDate.substr(6,10) + '-' + bookingInfo.eventDate.substr(3,2) + '-' + bookingInfo.eventDate.substr(0,2)}
                 onChange={handleChange}
             />
         </FormGroup>
@@ -187,10 +135,10 @@ const BookingForm = (props) => {
             </Label>
             <Input
                 id="exampleTime"
-                name="time"
+                name="eventTime"
                 placeholder="10:20"
                 type="time"
-                value={bookingInfo.time}
+                value={bookingInfo.eventTime}
                 onChange={handleChange}
             />
         </FormGroup>
@@ -200,33 +148,26 @@ const BookingForm = (props) => {
             </Label>
             <Input
                 id="exampleSelect"
-                name="hall"
+                name="facilityId"
+                placeholder={bookingInfo?.facilityName}
+                type="text"
+                // value={bookingInfo?.facilityName}
+                onChange={handleChange}
+            />
+            {/* <Input
+                id="exampleSelect"
+                name="facilityId"
                 type="select"
-                value={bookingInfo.hall}
+                value={bookingInfo?.facilityId}
                 onChange={handleChange}
             >
             <option>
                 Choose a Hall from the List
             </option>
-            <option>
-                Mayor Hall
-            </option>
-            <option>
-                VP Hall
-            </option>
-            <option>
-                President Hall
-            </option>
-            <option>
-                Bronze Conference Room
-            </option>
-            <option>
-                Silver Conference Room
-            </option>
-            <option>
-                Gold Conference Room
-            </option>
-            </Input>
+            {
+                facilities.map(facility => <option key={facility.id} value={facility.id} defaultValue={selectedFacility == facility.facilityName ? true : false}>{facility.name}</option> )
+            }
+            </Input> */}
         </FormGroup>
         <FormGroup>
             <Label for="exampleText">
@@ -235,9 +176,9 @@ const BookingForm = (props) => {
             <Input
                 style={{resize:"none", height:"120px"}}
                 id="exampleText"
-                name="info"
+                name="additionalInfo"
                 type="textarea"
-                value={bookingInfo.info}
+                value={bookingInfo.additionalInfo}
                 onChange={handleChange}
                 />
         </FormGroup>

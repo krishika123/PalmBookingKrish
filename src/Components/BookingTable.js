@@ -33,14 +33,21 @@ const Wrapper = styledComponents.div`
 
 const BookingTable = () => {
 
-    const [data,setData] = useState([])
+    const [bookings, setBookings] = useState([])
 
     const getBookings = async() => {
         try {
-          const response = await axios.get('/Booking/GetBookings')
-          const result = await response.json()
-          setData(result)
-          console.log({result});
+        //   const response = await axios.get('/Booking/GetBookings')
+        //   const result = await response.json()
+        let memory = sessionStorage.getItem('oidc.user:https://palmbookingkrish.com:ebookkeeping-pwa')
+        let token = JSON.parse(memory)
+        fetch('https://api.palmbookingkrish.com/api/Booking/GetBookings', {headers:{
+            Authorization: 'Bearer ' + token.access_token
+        }})
+        .then((res) => res.json())
+        .then((results) => setBookings(results))
+         
+          
           
         } catch (error) {
             console.log({error});
@@ -49,6 +56,7 @@ const BookingTable = () => {
       } 
       useEffect(() => {
         getBookings()
+        console.log('Bookings:', bookings)
       },[])
     //   console.log({data});
 
@@ -71,7 +79,7 @@ const BookingTable = () => {
             <tbody>
 
                 {
-                    data.map(item =>  <tr key={item.id}>
+                    bookings.map(item =>  <tr key={item.id}>
                                         <td>{item.user.name}</td>
                                         <td>{item.user.email}</td>
                                         <td>{item.eventDate}</td>

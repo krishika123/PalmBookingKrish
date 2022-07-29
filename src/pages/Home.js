@@ -12,7 +12,7 @@ const styles ={
   }
 }
 
-console.log({additionalInfo});
+//console.log({additionalInfo});
 
 const Home = () => {
   return (

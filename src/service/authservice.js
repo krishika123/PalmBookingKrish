@@ -18,7 +18,7 @@ const config = {
 }
 
 
-console.log({config})
+//console.log({config})
 
 const userManager = new UserManager(config)
 

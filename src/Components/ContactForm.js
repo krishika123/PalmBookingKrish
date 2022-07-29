@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation, useParams  } from 'react-router-dom';
-import axios from 'axios'
+import axios from '../api/axios';
 import {Form,FormGroup,Label,Input,Button} from 'reactstrap';
 
 const initData ={
@@ -16,23 +16,23 @@ const styles={
   }
 }
 
-const renderResponse = (data) =>{
-  let obj={}
-  obj.name = data.contactName
-  obj.email = data.contactEmail
-  obj.reasonOfContact = data.rOC
-  obj.message = data.message
+// const renderResponse = (data) =>{
+//   let obj={}
+//   obj.name = data.contactName
+//   obj.email = data.contactEmail
+//   obj.reasonOfContact = data.rOC
+//   obj.message = data.message
 
 
-  return obj
+//   return obj
 
-}
+// }
 
 
 const ContactForm = (props) => {
 
   const {id} = useParams()
-  console.log({id})
+  // console.log({id})
 
   const [contactInfo, setContactInfo] = useState(initData);
   const handleChange = (eve) =>{
@@ -52,9 +52,9 @@ const submitData = (e) =>{
 
 const getContactInfo = async()=>{
   try {
-      const response = await axios.post(`https://krishika.com:8089/api/Contact/CreateContact`)
+      const response = await axios.post(`/Contact/CreateContact`, contactInfo)
       console.log({response})
-      setContactInfo(renderResponse(response.data[0]))
+      // setContactInfo(response.data)
   } catch (error) {
       console.log({error})
   }

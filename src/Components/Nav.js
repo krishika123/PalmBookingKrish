@@ -6,7 +6,7 @@ import { login, logout } from '../service/authservice';
 
 const session_url="oidc.user:https://palmbookingkrish.com:ebookkeeping-pwa" ;
 const session=JSON.parse(sessionStorage.getItem(session_url))  ;
-console.log({session})
+//console.log({session})
 const getAuth = ()=>{
   if(session){
     const access_token = session?.access_token
@@ -90,7 +90,7 @@ const Nav = ({inputElement}) => {
     }
   }, [])
    
- console.log({auth})
+ //console.log({auth})
   return (
     <div ref={inputElement} style={styles.grid} className={"HeaderLinks"}>
         <Link style={{color:"white"}} to="/">Home</Link>

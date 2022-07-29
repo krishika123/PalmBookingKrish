@@ -14,11 +14,11 @@ import { useEffect } from 'react';
 // import LogIn from './pages/LogIn';
 
 function App() {
-  useEffect(() => {
-    console.log(process.env.NODE_ENV)
-    console.log(process.env.REACT_APP_OIDC_USER)
-    console.log('Auth:', process.env.REACT_APP_AUTHORITY)
-  })
+  // useEffect(() => {
+  //   console.log(process.env.NODE_ENV)
+  //   console.log(process.env.REACT_APP_OIDC_USER)
+  //   console.log('Auth:', process.env.REACT_APP_AUTHORITY)
+  // })
   return (
     <>
       <Layout>
