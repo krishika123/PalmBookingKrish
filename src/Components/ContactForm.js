@@ -6,7 +6,7 @@ import {Form,FormGroup,Label,Input,Button} from 'reactstrap';
 const initData ={
   contactName: '',
   contactEmail: '',
-  rOC: '',
+  reasonOfContact: '',
   message: '',
 }
 
@@ -43,34 +43,36 @@ const ContactForm = (props) => {
 
 const submitData = (e) =>{
   e.preventDefault()
+
+  postContactInfo()
   
-  if(!contactInfo.contactName){
-  return
-  }
-  console.log({contactInfo})
+  // if(!contactInfo.contactName){
+  // return
+  // }
+  // console.log({contactInfo})
 }
 
-const getContactInfo = async()=>{
+const postContactInfo = async()=>{
   try {
       const response = await axios.post(`/Contact/CreateContact`, contactInfo)
       console.log({response})
       // setContactInfo(response.data)
   } catch (error) {
-      console.log({error})
+      console.log({response:error})
   }
 }
 
-useEffect(() => {
+// useEffect(() => {
 
-  if(id){
-    getContactInfo()
-  }
+//   if(id){
+//     getContactInfo()
+//   }
 
 
-return () => {
+// return () => {
   
-}
-}, [id])
+// }
+// }, [id])
 
 
 
@@ -109,9 +111,9 @@ return () => {
         </Label>
         <Input
           id="exampleROC"
-          name="rOC"
+          name="reasonOfContact"
           type="select"
-          value={contactInfo.rOC}
+          value={contactInfo.reasonOfContact}
           onChange={handleChange}
         >
             <option>

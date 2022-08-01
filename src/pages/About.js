@@ -9,11 +9,7 @@ const About = () => {
   return (
     <div>
       <div>
-      <Header/>
-      </div>
-
-      <div>
-        <h3>About</h3>
+        <h3 style={{textAlign:"center"}}>About</h3>
         <p>
           Our functional spaces are designed to provide the ideal meeting and
           events experience to every guest.
@@ -30,10 +26,6 @@ const About = () => {
         hallsAndRooms.map(item =><Cards key={item.title} {...item} />)
         }
         </div>
-      </div>
-      <br></br>
-      <div>
-      <Footer/>
       </div>
     </div>
   )

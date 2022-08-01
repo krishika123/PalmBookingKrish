@@ -2,8 +2,6 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomeCarousel from '../Components/HomeCarousel';
 import Cards from '../Components/Cards';
-import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 import { additionalInfo } from '../fakeData/data';
 
 const styles ={
@@ -18,9 +16,6 @@ const Home = () => {
   return (
     <div>
       <div>
-        <Header/>
-      </div>
-      <div>
         <h3>This website is the official conference room and hall booking site for the Palm Hotel.</h3>
         <p>At this prestigious establishment, we offer 3 large conference halls and 9 comfortable conference rooms, all of which can be personalized to your needs.</p>
         <HomeCarousel/>
@@ -32,9 +27,6 @@ const Home = () => {
         </div>    
       </div>
       <br></br>
-      <div>
-      <Footer/>
-      </div>
     </div>
   )
 }

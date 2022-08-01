@@ -1,19 +1,289 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+/* || RESET */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
-  width: 80vw;
-  margin: 0 auto !important;
-  background-color:#FFFCF2 !important;
-  color: black !important;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* || GENERAL STYLES */
+body {
+  font: 1.5rem "Nunito", sans-serif;
+  min-height: 100vh;
+
+  background-color: #475569;
+  background-image: radial-gradient(whitesmoke, #475569);
+  display: flex;
+  flex-direction: column;
 }
+
+header, nav, main, footer {
+  display: grid;
+  place-content: center;
+  grid-template-columns: 100%;
+  text-align: center;
+}
+
+header {
+  position: sticky;
+  color: whitesmoke;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  top: 0;
+  
+}
+
+nav {
+  background-color: #fff;
+  color: #000;
+  padding: 0.5rem;
+  border-bottom: 2px solid #000;
+}
+
+
+/* Styling for cards compnent */
+.cardimg{
+  width: 100%;
+  height:250px;
+  opacity: 1;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  }
+  .container-slide {
+    position: relative;
+    object-fit: contain;
+  }
+  .container-slide:hover .image {
+    opacity: 0.3;
+  }
+  .container-slide:hover .middle {
+    opacity: 0.68;
+  }
+
+
+/* Main Styling */
+main {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  gap: 20px;
+  padding: 20px;
+  text-align: justify;
+}
+main > div{
+  border: 1px solid #1E293B;
+  height: auto;
+}
+
+
+/* Footer Styling*/
+footer { 
+  bottom: 0;
+  height: fit-content;
+  background-color: #1E293B;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: justify;
+  color: white;
+  padding: 10px 20px;
+}
+.footerP {
+  width:80%;
+}
+.footerLinks{
+  color: white;
+}
+
+/* Carousel Styling */
+.carouselImage{
+  width: 100%;
+  height: 300px;
+}
+
+
+/* Form Styling */
+.parentTextBox{
+  margin:20px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+.textBox{
+  width:35%;
+}
+
+
+
+/* || XS */
+@media screen and (max-width: 395px) {
+  footer { 
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+  }
+  .footerP {
+    width:100%;
+    font-size: small;
+  }
+  .footerLinksParent{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  header{
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 85px;
+  }
+  nav {
+    background-color: #fff;
+    color: #000;
+    padding: 0.5rem;
+    border-bottom: 2px solid #000;
+  }
+}
+
+/* || SMALL */
+@media screen and (min-width: 576px) {
+  body {
+    background-color: green;
+    background-image: radial-gradient(whitesmoke, green)
+  }
+  nav {
+    display: none;
+  }
+
+  footer{
+    height: fit-content;
+    padding-bottom: 0;
+  }
+  .footerP {
+    width:50%;
+  }
+  .carouselImage{
+    height: 400px;
+  }
+ 
+
+}
+
+/* || MEDIUM */
+@media screen and (min-width: 768px) {
+  body {
+    background-color: gold;
+    background-image: radial-gradient(whitesmoke, gold)
+  }
+  footer{
+    height: fit-content;
+  }
+  .footerP {
+    width:50%;
+  }
+  nav { display: none }
+  .carouselImage{
+    height: 600px;
+  }
+  .grid-container{
+    display: grid;
+    gap:10px;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  }
+}
+
+/* || LARGE */
+@media screen and (min-width: 992px) {
+  body {
+    background-color: firebrick;
+    background-image: radial-gradient(whitesmoke, firebrick)
+  }
+  footer{
+    height: fit-content;
+  }
+  .footerP {
+    width:50%;
+  }
+  nav { display: none }
+  .carouselImage{
+    height: 700px;
+  }
+  main{
+    width:80vw;
+    justify-items: center !important;
+    align-items: center !important;
+    margin: 0 auto;
+  }
+}
+
+/* || XL  */
+@media screen and (min-width: 1200px) {
+  body {
+    background-color: rebeccapurple;
+    background-image: radial-gradient(whitesmoke, rebeccapurple)
+  }
+  footer{
+    display:flex;
+    justify-content: space-between;
+    text-align: justify;
+    color: white;
+    padding: 10px 20px;
+    height: fit-content;
+  }
+  .footerP {
+    width:50%;
+  }
+  nav { display: none }
+  
+  .carouselImage{
+    height: 800px;
+  }
+  main{
+    width:80vw;
+    justify-items: center !important;
+    align-items: center !important;
+    margin: 0 auto;
+  }
+}
+
+/* || MOBILE DEVICE LANDSCAPE  */
+@media screen and (max-height: 425px) and (min-aspect-ratio: 7/4) {
+  body {
+    background-color: dodgerblue;
+    background-image: radial-gradient(whitesmoke, dodgerblue)
+  }
+
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+
+  nav { display: none }
+}
+
 

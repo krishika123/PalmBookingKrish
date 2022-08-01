@@ -7,17 +7,10 @@ import Footer from '../Components/Footer';
 const Contact = () => {
   return (
     <div>
-      <div>
-      <Header/>
-      </div>
       <div className='parentTextBox'>
       <div className='textBox'>
         <ContactForm/>
       </div>
-      </div>
-      <br></br>
-      <div>
-      <Footer/>
       </div>
     </div>
   )

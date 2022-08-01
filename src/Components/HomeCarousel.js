@@ -3,13 +3,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 import styles from "styled-components"
 
-const ImageWrapper = styles.div`
-    img{
-        width: auto;
-        height:350px
-    }
-
-`
 
 const HomeCarousel = () => {
     return (
@@ -25,7 +18,7 @@ const HomeCarousel = () => {
                     <p className="legend">Lobby</p>
                 </div>
                 <div>
-                    <img className={'carouselImage'} src="https://www.peerspace.com/resources/wp-content/uploads/Peerspace-hotel-meeting-room-1-1024x682.jpeg" />
+                    <img className={'carouselImage'} src="https://image-tc.galaxy.tf/wijpeg-40brqoe41e56e218e4mzswuk8/standard.jpg?crop=106%2C0%2C1788%2C1341" />
                     <p className="legend">Mayor Hall</p>
                 </div>
                 <div>
@@ -37,7 +30,7 @@ const HomeCarousel = () => {
                     <p className="legend">President Hall</p>
                 </div>
                 <div>
-                    <img className={'carouselImage'} src="https://th.bing.com/th/id/R.820b455342821b0c0576cb1fcfbca11d?rik=RQbQS0Y0CKHEbA&riu=http://blog.fluidmeet.com/wp-content/uploads/2015/10/blog2.jpg&ehk=yEanvijOtit06ugpAeG5YeHfPkha0C49scJiEquKvJ0=&risl=&pid=ImgRaw&r=0" />
+                    <img className={'carouselImage'} src="https://www.peerspace.com/resources/wp-content/uploads/Peerspace-Hotel-Meeting-Room-Featured-Image-1.jpeg" />
                     <p className="legend">Bronze Conference Room</p>
                 </div>
                 <div>

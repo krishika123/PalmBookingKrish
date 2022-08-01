@@ -27,19 +27,10 @@ const ProfileForm = () => {
                 type="email"
             />
         </FormGroup>
-        <FormGroup>
-            <Label for="examplePhone">
-                Phone Number
-            </Label>
-            <Input
-                id="examplePhone"
-                name="phonenumber"
-                type="tel"
-            />
-        </FormGroup>
+        </Form>
+
         <h7>Bookings:</h7>
         
-        </Form>
     </div>
   )
 }

@@ -1,6 +1,6 @@
-import './App.css';
+//import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Layout from './pages/Layout';
+import Layout from './Components/Layout/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Book from './pages/Book';
@@ -31,12 +31,8 @@ function App() {
           <Route path='/bookings' element={<Bookings/>}/>
           
           <Route path='/profile' element={<Profile/>}/>
-          {/* <Route path='/signUp' element={<SignUp/>}/>
-          <Route path='/logIn' element={<LogIn/>}/> */}
           <Route path='*' element={<Error/>}/>
         </Routes>
-        {/* <Home/> */}
-        
       </Layout>
     </>
   );
