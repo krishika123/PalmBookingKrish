@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alegreya:wght@500&display=swap");
 
 /* || RESET */
+
 * {
   margin: 0;
   padding: 0;
@@ -8,52 +10,63 @@
 }
 
 /* || GENERAL STYLES */
+
 body {
   font: 1.5rem "Nunito", sans-serif;
   min-height: 100vh;
-
-  background-color: #475569;
-  background-image: radial-gradient(whitesmoke, #475569);
+  background-color: white;
   display: flex;
   flex-direction: column;
 }
 
-header, nav, main, footer {
+header,
+nav,
+main,
+footer {
   display: grid;
   place-content: center;
   grid-template-columns: 100%;
   text-align: center;
 }
 
+.logoStyle {
+  font-size: 30px;
+  font-family: "Alegreya";
+}
+
 header {
   position: sticky;
   color: whitesmoke;
-  background-color: black;
+  background-color: #183059;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   top: 0;
-  
+  min-height: 80px;
+  font-size: 15px;
+  z-index: 10;
 }
 
 nav {
-  background-color: #fff;
+  background-color: #2e86ab;
   color: #000;
   padding: 0.5rem;
   border-bottom: 2px solid #000;
+  /*z-index: 10; */
 }
-
 
 /* Styling for cards compnent */
-.cardimg{
+
+.cardimg {
   width: 100%;
-  height:250px;
+  height: 250px;
   opacity: 1;
-  transition: .5s ease;
+  transition: 0.5s ease;
   backface-visibility: hidden;
 }
+
 .middle {
-  transition: .5s ease;
+  transition: 0.5s ease;
   opacity: 0;
   position: absolute;
   top: 50%;
@@ -70,93 +83,108 @@ nav {
   justify-content: center;
   color: white;
   font-weight: bold;
-  }
-  .container-slide {
-    position: relative;
-    object-fit: contain;
-  }
-  .container-slide:hover .image {
-    opacity: 0.3;
-  }
-  .container-slide:hover .middle {
-    opacity: 0.68;
-  }
+}
 
+.container-slide {
+  position: relative;
+  object-fit: contain;
+}
+
+.container-slide:hover .image {
+  opacity: 0.3;
+}
+
+.container-slide:hover .middle {
+  opacity: 0.68;
+}
 
 /* Main Styling */
+
 main {
   flex-grow: 1;
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   padding: 20px;
   text-align: justify;
 }
-main > div{
+
+/*main > div{
   border: 1px solid #1E293B;
   height: auto;
-}
-
+}*/
 
 /* Footer Styling*/
-footer { 
+
+footer {
   bottom: 0;
   height: fit-content;
-  background-color: #1E293B;
-  display:flex;
+  background-color: #183059;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   text-align: justify;
   color: white;
   padding: 10px 20px;
 }
+
 .footerP {
-  width:80%;
+  width: 80%;
 }
-.footerLinks{
+
+.footerLinks {
   color: white;
+  font-size: 20px;
 }
 
 /* Carousel Styling */
-.carouselImage{
+
+.carouselImage {
   width: 100%;
   height: 300px;
 }
 
-
 /* Form Styling */
-.parentTextBox{
-  margin:20px;
-  display:flex;
+
+.parentTextBox {
+  margin: 20px;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   text-align: left;
 }
-.textBox{
-  width:35%;
+
+.textBox {
+  width: 40%;
 }
 
-
-
 /* || XS */
+
 @media screen and (max-width: 395px) {
-  footer { 
-    display:flex;
+  .logoStyle {
+    font-size: 20px;
+    text-align: center;
+  }
+  footer {
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
   }
   .footerP {
-    width:100%;
+    width: 100%;
     font-size: small;
   }
-  .footerLinksParent{
+  .footerLinks {
+    font-size: 15px;
+    text-align: center;
+  }
+  .footerLinksParent {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
-  header{
+  header {
     padding-top: 15px;
     display: flex;
     flex-direction: column;
@@ -172,84 +200,105 @@ footer {
 }
 
 /* || SMALL */
+
 @media screen and (min-width: 576px) {
-  body {
-    background-color: green;
-    background-image: radial-gradient(whitesmoke, green)
+  .logoStyle {
+    font-size: 30px;
+    text-align: center;
+  }
+  header {
+    font-size: 20px;
   }
   nav {
     display: none;
   }
-
-  footer{
+  footer {
     height: fit-content;
     padding-bottom: 0;
   }
   .footerP {
-    width:50%;
+    width: 50%;
   }
-  .carouselImage{
+  .carouselImage {
     height: 400px;
   }
- 
-
+  .textBox {
+    width: 50%;
+  }
 }
 
 /* || MEDIUM */
+
 @media screen and (min-width: 768px) {
-  body {
+  /*body {
     background-color: gold;
     background-image: radial-gradient(whitesmoke, gold)
+  }*/
+  .logoStyle {
+    font-size: 55px;
+    text-align: center;
   }
-  footer{
+  footer {
     height: fit-content;
   }
   .footerP {
-    width:50%;
+    width: 50%;
   }
-  nav { display: none }
-  .carouselImage{
+  nav {
+    display: none;
+  }
+  .carouselImage {
     height: 600px;
   }
-  .grid-container{
+  .grid-container {
     display: grid;
-    gap:10px;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  .textBox {
+    width: 40%;
   }
 }
 
 /* || LARGE */
+
 @media screen and (min-width: 992px) {
-  body {
+  /*body {
     background-color: firebrick;
     background-image: radial-gradient(whitesmoke, firebrick)
-  }
-  footer{
+  }*/
+  footer {
     height: fit-content;
   }
   .footerP {
-    width:50%;
+    width: 50%;
   }
-  nav { display: none }
-  .carouselImage{
+  nav {
+    display: none;
+  }
+  .carouselImage {
     height: 700px;
   }
-  main{
-    width:80vw;
+  main {
+    width: 80vw;
     justify-items: center !important;
     align-items: center !important;
     margin: 0 auto;
   }
+  .textBox {
+    width: 80%;
+  }
 }
 
 /* || XL  */
+
 @media screen and (min-width: 1200px) {
-  body {
+  /*body {
     background-color: rebeccapurple;
     background-image: radial-gradient(whitesmoke, rebeccapurple)
-  }
-  footer{
-    display:flex;
+  }*/
+  footer {
+    display: flex;
     justify-content: space-between;
     text-align: justify;
     color: white;
@@ -257,33 +306,37 @@ footer {
     height: fit-content;
   }
   .footerP {
-    width:50%;
+    width: 50%;
   }
-  nav { display: none }
-  
-  .carouselImage{
+  nav {
+    display: none;
+  }
+  .carouselImage {
     height: 800px;
   }
-  main{
-    width:80vw;
+  main {
+    width: 80vw;
     justify-items: center !important;
     align-items: center !important;
     margin: 0 auto;
   }
+  .textBox {
+    width: 80%;
+  }
 }
 
 /* || MOBILE DEVICE LANDSCAPE  */
+
 @media screen and (max-height: 425px) and (min-aspect-ratio: 7/4) {
-  body {
+  /*body {
     background-color: dodgerblue;
     background-image: radial-gradient(whitesmoke, dodgerblue)
-  }
-
-  h1, h2 {
+  }*/
+  h1,
+  h2 {
     font-size: 1.5rem;
   }
-
-  nav { display: none }
+  nav {
+    display: none;
+  }
 }
-
-
