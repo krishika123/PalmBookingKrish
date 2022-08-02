@@ -27,6 +27,7 @@ const BookingForm = (props) => {
     const [facilities, setFacilities] = useState([]);
     const [selectedFacility, setselectedFacility] = useState('')
    
+    
 
     const renderResponse = (data) =>{
         //console.log({data: facilities.find(x => x.name === data.facilityName)?.id, facilities})
@@ -41,6 +42,7 @@ const BookingForm = (props) => {
         setBookingInfo(prev =>({
             ...prev, [eve.target.name]:eve.target.value}))
     }
+    console.log({bookingInfo})
    
     const getBookingInfo = async()=>{
             try {
@@ -66,10 +68,6 @@ const BookingForm = (props) => {
             const result = await axios.get(`/Facility/GetFacilities`)
             console.log({result})
             setFacilities(result.data)
-
-            if(id){
-                getBookingInfo()
-            }
            
         }catch (error){
 
@@ -81,11 +79,11 @@ const BookingForm = (props) => {
         e.preventDefault()
 
 
-        console.log({bookingInfo})
+        // console.log({bookingInfo})
           //bookingInfo?.bookingname ?   console.log({objData}):alert("just add your name")
-           bookingInfo.date.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Valid Date.")
-           bookingInfo.time.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Valid Time.")
-           bookingInfo.hall.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Facility.")
+        //    bookingInfo.date.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Valid Date.")
+        //    bookingInfo.time.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Valid Time.")
+        //    bookingInfo.hall.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Facility.")
 
            postBookingInfo()
            
@@ -94,10 +92,11 @@ const BookingForm = (props) => {
 
     useEffect(() => {
 
-        if(id){
-            getFacilities()
+        // if(id){
+        //     getFacilities()
           
-        }
+        // }
+        getFacilities()
       
       return () => {
         
@@ -125,7 +124,8 @@ const BookingForm = (props) => {
                 name="eventDate"
                 placeholder="01-10-2022"
                 type="date"            
-                value={bookingInfo.eventDate.substr(6,10) + '-' + bookingInfo.eventDate.substr(3,2) + '-' + bookingInfo.eventDate.substr(0,2)}
+                // value={bookingInfo.eventDate.substr(6,10) + '-' + bookingInfo.eventDate.substr(3,2) + '-' + bookingInfo.eventDate.substr(0,2)}
+                value={bookingInfo?.eventDate || ''}
                 onChange={handleChange}
             />
         </FormGroup>
@@ -146,15 +146,15 @@ const BookingForm = (props) => {
             <Label for="exampleSelect">
                 Select a Hall or Conference Room
             </Label>
-            <Input
+            {/* <Input
                 id="exampleSelect"
                 name="facilityId"
                 placeholder={bookingInfo?.facilityName}
                 type="text"
                 // value={bookingInfo?.facilityName}
                 onChange={handleChange}
-            />
-            {/* <Input
+            /> */}
+            <Input
                 id="exampleSelect"
                 name="facilityId"
                 type="select"
@@ -167,7 +167,7 @@ const BookingForm = (props) => {
             {
                 facilities.map(facility => <option key={facility.id} value={facility.id} defaultValue={selectedFacility == facility.facilityName ? true : false}>{facility.name}</option> )
             }
-            </Input> */}
+            </Input>
         </FormGroup>
         <FormGroup>
             <Label for="exampleText">

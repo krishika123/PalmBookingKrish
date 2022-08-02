@@ -52,9 +52,33 @@ const submitData = (e) =>{
   // console.log({contactInfo})
 }
 
+// {
+//   "user": {
+//     "name": "string",
+//     "email": "string"
+//   },
+//   "reasonOfContact": "string",
+//   "message": "string"
+// }
+// const initData ={
+//   contactName: '',
+//   contactEmail: '',
+//   reasonOfContact: '',
+//   message: '',
+// }
+
+
 const postContactInfo = async()=>{
+
+  let postObj={}, user={}
+  user.name = contactInfo.contactName
+  user.email = contactInfo.contactEmail
+
+  postObj.reasonOfContact =  contactInfo.reasonOfContact
+  postObj.message =  contactInfo.message
+
   try {
-      const response = await axios.post(`/Contact/CreateContact`, contactInfo)
+      const response = await axios.post(`/Contact/CreateContact`, {...postObj,user})
       console.log({response})
       // setContactInfo(response.data)
   } catch (error) {

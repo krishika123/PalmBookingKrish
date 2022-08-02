@@ -3,7 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="footer">
       <div>
         <h4 style={{ textAlign: "left" }}>About</h4>
         <p className="footerP">
