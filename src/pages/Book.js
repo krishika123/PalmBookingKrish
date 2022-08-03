@@ -1,10 +1,6 @@
 import React from 'react';
 import BookingForm from '../Components/BookingForm';
-// import Header from '../Components/Header';
-// import Footer from '../Components/Footer';
-import contactform from '../Components/contactform.png';
-
-
+import bookingform from '../Components/bookingform.png';
 
 const Book = () => {
   return (
@@ -15,20 +11,18 @@ const Book = () => {
       </div>
 
       <div className='parentFormDiv'>
-
         <div className='childFormDiv'>
           <div className='parentTextBox'>
           <div className='textBox'>
-          <BookingForm/>
+            <BookingForm/>
           </div>
           </div>
         </div>
         <div className='childFormDiv'>
-          <img src={contactform}></img>
+          <img src={bookingform} className='imgFormstyle'></img>
         </div>
-        
-      </div>
-      
+      </div>  
+
     </div>
     
   )

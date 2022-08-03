@@ -92,7 +92,7 @@ const Nav = ({inputElement}) => {
    
  //console.log({auth})
   return (
-    <div ref={inputElement} style={styles.grid} className={"HeaderLinks"}>
+    <div ref={inputElement} style={styles.grid}>
         <Link style={{color:"white"}} to="/">Home</Link>
         <Link style={{color:"white"}} to="/about">About</Link>
         <Link style={{color:"white"}} to="/book">Book</Link>
@@ -101,24 +101,22 @@ const Nav = ({inputElement}) => {
         {
           show ?  
           <div style={styles.PopUp} >
-            <div style={styles.PopUpChild}>
+          <div style={styles.PopUpChild}>
             <div>
             <Link to='/profile'><img style={styles.AccountImage} src={profileicon}></img></Link>
             </div>
+            
             <div>
            {
             auth ? <h4>{auth.user }</h4>:<button style={styles.Button} type='submit' onClick={login}> Log In </button>
            }
-              
-           
             </div>
             <div>
             {!auth ?null : <button style={styles.Button} type='submit' onClick={logout}> Log Out </button>}
-              
-           
             </div>
-            </div>
-            </div> : null
+
+          </div>
+          </div> : null
         }
       <Outlet/>
     </div>

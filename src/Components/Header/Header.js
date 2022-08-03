@@ -5,8 +5,6 @@ const Content = () => {
   return (
     <>
       <h1 className="logoStyle">PalmBooker</h1>
-      {/* <Nav inputElement={inputElement} /> */}
-      {/* <img onClick={focusInput} src={hammenu} className={"hammenuStyle"}></img> */}
     </>
   );
 };
@@ -14,8 +12,8 @@ const Content = () => {
 const Header = () => {
   return (
     <header>
-      <Content />
-      <Nav />
+      <Content/>
+      <Nav/>
       <nav></nav>
     </header>
   );
