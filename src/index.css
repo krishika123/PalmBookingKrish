@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alegreya:wght@500&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap");
 
 /* || RESET */
 
@@ -15,28 +15,28 @@
 body {
   /* font: 1.5rem C sans-serif; */
   font-family: "Merriweather";
-  font-size:medium;
+  font-size: medium;
   text-align: center;
   min-height: 100vh;
   background-color: white;
   display: flex;
   flex-direction: column;
-  margin:10px;
+  margin: 10px;
 }
 
-
-header,main,footer {
+header,
+main,
+footer {
   display: grid;
   place-content: center;
   grid-template-columns: 100%;
   text-align: center;
 }
 
-
 .logoStyle {
   font-size: 40px;
   text-align: left;
-  margin:10px;
+  margin: 10px;
   font-family: "Alegreya";
 }
 
@@ -53,8 +53,6 @@ header {
   z-index: 10;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
-
-
 
 /* Styling for cards compnent */
 
@@ -98,7 +96,6 @@ header {
   opacity: 0.68;
 }
 
-
 /* Main Styling */
 
 main {
@@ -122,7 +119,7 @@ footer {
   padding: 10px 20px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
-.footer{
+.footer {
   width: 100% !important;
   position: absolute;
 }
@@ -134,13 +131,11 @@ footer {
   font-size: 20px;
 }
 
-
 /* Carousel Styling */
 .carouselImage {
   width: 100%;
   height: 300px;
 }
-
 
 /* Form Styling */
 .parentTextBox {
@@ -154,63 +149,56 @@ footer {
 .textBox {
   width: 100%;
 }
-.parentFormDiv{
-  display: grid ;
-  gap: 5% ;
-  grid-template-columns: 47.5% 47.5% ;
-  overflow: hidden ; 
+.parentFormDiv {
+  display: grid;
+  gap: 5%;
+  grid-template-columns: 47.5% 47.5%;
+  overflow: hidden;
 }
-.childFormDiv{
-  width: 100% ;
+.childFormDiv {
+  width: 100%;
 }
-.imgFormstyle{
-  width: 100% ;
-  height:100%;
+.imgFormstyle {
+  width: 100%;
+  height: 100%;
 }
-
-
 
 /* Max Width Media Queries */
 @media screen and (max-width: 820px) {
-  .parentFormDiv{
-    display: block ;
-    gap: 0% ;
-    grid-template-columns: none ;
+  .parentFormDiv {
+    display: block;
+    gap: 0%;
+    grid-template-columns: none;
   }
-  .childFormDiv{
-    width: 100% ;
+  .childFormDiv {
+    width: 100%;
   }
-  .imgFormstyle{
+  .imgFormstyle {
     display: none;
   }
-  
 }
-
 
 /* Scrolling Media Queries */
 @media screen and (max-width: 380px) {
-  .footer{
-    position:relative
+  .footer {
+    position: relative;
   }
-  main{
+  main {
     overflow-y: scroll;
   }
 }
 @media screen and (max-height: 720px) {
-  .footer{
-    position:relative
+  .footer {
+    position: relative;
   }
-  main{
+  main {
     overflow-y: scroll;
   }
 }
 
-
-
 /* || XS */
 
 @media screen and (max-width: 395px) {
-  
   footer {
     display: flex;
     flex-direction: column;
@@ -237,16 +225,14 @@ footer {
     justify-content: space-evenly;
     height: 85px;
   }
-  
 }
 
 /* || SMALL */
 @media screen and (min-width: 576px) {
- 
   header {
     font-size: 20px;
   }
-  
+
   footer {
     height: fit-content;
     padding-bottom: 0;
@@ -260,7 +246,6 @@ footer {
   .textBox {
     width: 50%;
   }
-
 }
 
 /* || MEDIUM */
@@ -270,7 +255,6 @@ footer {
     background-color: gold;
     background-image: radial-gradient(whitesmoke, gold)
   }*/
-  
 
   .carouselImage {
     height: 600px;
@@ -279,18 +263,19 @@ footer {
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-   
   }
   .cardimg {
     width: 100%;
     height: 350px !important;
-  
+  }
+  .container-slide {
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
   }
 }
 
 /* || LARGE */
 
-@media screen and (min-width:820px) {
+@media screen and (min-width: 820px) {
   /*body {
     background-color: firebrick;
     background-image: radial-gradient(whitesmoke, firebrick)
@@ -305,13 +290,12 @@ footer {
     align-items: center !important;
     margin: 0 auto;
   }
-  .parentFormDiv{
+  .parentFormDiv {
     min-width: 500px;
   }
-  .textBox{
+  .textBox {
     min-width: 100%;
   }
-
 }
 
 /* || XL  */
@@ -339,7 +323,6 @@ footer {
     align-items: center !important;
     margin: 0 auto;
   }
-
 }
 
 /* || MOBILE DEVICE LANDSCAPE  */
@@ -353,5 +336,4 @@ footer {
   h2 {
     font-size: 1.5rem;
   }
-  
 }
