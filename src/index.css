@@ -53,6 +53,9 @@ header {
   z-index: 10;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
+.SmallHeaderClass{
+  display: none;
+}
 
 /* Styling for cards compnent */
 
@@ -121,7 +124,7 @@ footer {
 }
 .footer {
   width: 100% !important;
-  position: absolute;
+  position: relative;
 }
 .footerP {
   width: 80%;
@@ -177,9 +180,17 @@ footer {
     display: none;
   }
 }
+@media screen and (max-width: 768px) {
+  .HeaderClass{
+    display: none;
+  }
+  .SmallHeaderClass{
+    display: block;
+  }
+}
 
 /* Scrolling Media Queries */
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 770px) {
   .footer {
     position: relative;
   }
@@ -187,12 +198,28 @@ footer {
     overflow-y: scroll;
   }
 }
-@media screen and (max-height: 720px) {
+@media screen and (max-height: 915px) {
+  .footer {
+    position: relative !important;
+  }
+  main {
+    overflow-y: scroll;
+  }
+}
+@media screen and (min-width: 771px) {
   .footer {
     position: relative;
   }
   main {
-    overflow-y: scroll;
+    overflow-y: hidden;
+  }
+}
+@media screen and (min-height: 915px) {
+  .footer {
+    position: relative;
+  }
+  main {
+    overflow-y: hidden;
   }
 }
 
@@ -271,6 +298,7 @@ footer {
   .container-slide {
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
   }
+  
 }
 
 /* || LARGE */

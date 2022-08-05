@@ -53,19 +53,20 @@ const styles = {
     flexDirection: "column",
     justifyContent: "center",
     alignContent: "center",
-    textAlign: "center"
+    textAlign: "center",
+    color:"white",
   },
   Button: {
-    width: "50%",
+    width: "70%",
     height: "auto",
     margin: 5,
-    padding: 5
+    padding: 5,
   },
   ButtonLogIn: {
-    width: "50%",
+    width: "70%",
     height: "auto",
     padding: 5,
-    margin: "15%"
+    margin: "15%",
   }
 };
 

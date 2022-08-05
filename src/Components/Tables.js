@@ -1,7 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState} from 'react';
+import { Link , useParams, useNavigate,  } from 'react-router-dom';
 import styledComponents from 'styled-components';
-import axios from 'axios';
+import axios from '../api/axios';
+import SweetAlert from 'react-bootstrap-sweetalert';
+import LoadingOverlay from 'react-loading-overlay';
+
 
 
 const styling ={
@@ -27,31 +30,56 @@ const Wrapper = styledComponents.div`
     `
 
 const Tables = ({id}) => {
-    // const handleEdit =(id)=>{
 
-
-      
-    //     // if (window.confirm('Would You Like To Edit This Record?')) {
-    //     //     //eslint-disable-line
-    //     //     window.location.href="/book" 
-    //     //    }
-    //     };
-    
+    const navigate = useNavigate();
+    const [showAlert, setShowAlert] = useState(false)
+    const [isActive, setIsActive] = useState(false)
+    const [selectedId, SetSelectedId] = useState("")
 
     const deleteFunc = async(id) => {
-      //console.log('Delete item:', id)
-        let res = await axios.delete(`https://api.palmbookingkrish.com/api/Booking/DeleteBookingBy${id}`)
-        let json = await res.json()
-
-        console.log(json)
+     
+      SetSelectedId(id)
+      setIsActive(true)
+        
     }
        
- 
+   const onCancel =()=>{
+    setIsActive(false)
+    }
+   const onConfirm = async(id)=>{
+    try {
+        const res = await axios.delete(`/Booking/DeleteBookingBy${selectedId}`)
+        
+        if(res){
+            window.location.reload()
+        }
+        console.log(res)
+        setIsActive(false)
+  
+    } catch (error) {
+        console.log({response:error})
+        setIsActive(false)
+    }
+    
+    }
         
    
   return (
     
                     <Wrapper>
+                        <SweetAlert
+                                warning
+                                showCancel
+                                confirmBtnText="Yes, delete it!"
+                                confirmBtnBsStyle="danger"
+                                title="Are you sure you want to delete this record?"
+                                onConfirm={onConfirm}
+                                onCancel={onCancel}
+                                show={isActive}
+                                focusCancelBtn
+                                >
+                                    You will not be able to get this booking back!
+                        </SweetAlert>
                         <div className='child1ButtonSpacing'>
                             <Link to={`/book/${id}`}>
                             <button id={id} style={styling.buttonStyle} type='button'>
@@ -61,11 +89,10 @@ const Tables = ({id}) => {
                            
                         </div>
                         <div className='child2ButtonSpacing'>
-                        {/* <Link to={`/book/${id}`}> */}
+                       
                         <button onClick={() => deleteFunc(id)} id={id} type='button'>
                             <img style={styling.imageStyle} src='https://icon-library.com/images/icon-delete/icon-delete-16.jpg'/>
-                            </button>
-                        {/* </Link> */}
+                        </button>
                         </div>
                     </Wrapper>
                

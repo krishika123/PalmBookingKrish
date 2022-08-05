@@ -80,12 +80,12 @@ const BookingTable = () => {
 
                 {
                     bookings.map(item =>  <tr key={item.id}>
-                                        <td>{item.user.name}</td>
-                                        <td>{item.user.email}</td>
-                                        <td>{item.eventDate}</td>
-                                        <td>{item.eventTime}</td>
-                                        <td>{item.facilityName}</td>
-                                        <td>{item.additionalInfo}</td>                                        
+                                        <td>{item?.user?.name}</td>
+                                        <td>{item?.user?.email}</td>
+                                        <td>{item?.eventDate}</td>
+                                        <td>{item?.eventTime}</td>
+                                        <td>{item?.facilityName}</td>
+                                        <td>{item?.additionalInfo}</td>                                        
                                         <td><Tables id={item.id}/></td>
                         </tr>)
                 }

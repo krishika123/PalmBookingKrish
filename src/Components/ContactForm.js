@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {useLocation, useParams  } from 'react-router-dom';
+import React, { useState} from 'react';
+import { useParams, useNavigate  } from 'react-router-dom';
 import axios from '../api/axios';
 import {Form,FormGroup,Label,Input,Button} from 'reactstrap';
+import SweetAlert from 'react-bootstrap-sweetalert';
+import LoadingOverlay from 'react-loading-overlay';
+
 
 const initData ={
   contactName: '',
@@ -16,91 +19,71 @@ const styles={
   }
 }
 
-// const renderResponse = (data) =>{
-//   let obj={}
-//   obj.name = data.contactName
-//   obj.email = data.contactEmail
-//   obj.reasonOfContact = data.rOC
-//   obj.message = data.message
-
-
-//   return obj
-
-// }
 
 
 const ContactForm = (props) => {
-
+  const navigate = useNavigate();
   const {id} = useParams()
-  // console.log({id})
+  const [showAlert, setShowAlert] = useState(false)
+  const [isActive, setIsActive] = useState(false)
 
   const [contactInfo, setContactInfo] = useState(initData);
   const handleChange = (eve) =>{
     setContactInfo(prev =>({
         ...prev, [eve.target.name]:eve.target.value}))
   }
-// console.log({contactInfo})
+
 
 const submitData = (e) =>{
   e.preventDefault()
 
   postContactInfo()
   
-  // if(!contactInfo.contactName){
-  // return
-  // }
-  // console.log({contactInfo})
-}
 
-// {
-//   "user": {
-//     "name": "string",
-//     "email": "string"
-//   },
-//   "reasonOfContact": "string",
-//   "message": "string"
-// }
-// const initData ={
-//   contactName: '',
-//   contactEmail: '',
-//   reasonOfContact: '',
-//   message: '',
-// }
+}
 
 
 const postContactInfo = async()=>{
+  setIsActive(true)
 
   let postObj={}, user={}
-  user.name = contactInfo.contactName
-  user.email = contactInfo.contactEmail
+  
 
   postObj.reasonOfContact =  contactInfo.reasonOfContact
   postObj.message =  contactInfo.message
-
+  postObj.name = contactInfo.contactName
+  postObj.email = contactInfo.contactEmail
   try {
-      const response = await axios.post(`/Contact/CreateContact`, {...postObj,user})
-      console.log({response})
-      // setContactInfo(response.data)
+      const response = await axios.post(`/Contact`, {...postObj})
+      setShowAlert(true)
+      setIsActive(false)
+
   } catch (error) {
       console.log({response:error})
+      setIsActive(false)
   }
 }
 
-// useEffect(() => {
 
-//   if(id){
-//     getContactInfo()
-//   }
+const onConfirm = ()=>{
 
+  setShowAlert(false)
 
-// return () => {
-  
-// }
-// }, [id])
+  navigate("/", { replace: true });
 
+}
+const onCancel =()=>{
 
+}
 
   return (
+    <LoadingOverlay
+  active={isActive}
+  spinner
+  text='Loading your content...'
+  >
+ 
+
     <div>
     <Form>
     <FormGroup>
@@ -173,8 +156,12 @@ const postContactInfo = async()=>{
       <Button style={styles.Button} type='submit' onClick={submitData}>
         Submit
       </Button>
+      <SweetAlert show={showAlert} success title="Your message has been sent!" onConfirm={onConfirm} onCancel={onCancel}>
+        Thank You!
+      </SweetAlert>
     </Form>
     </div>
+    </LoadingOverlay>
   )
 }
 

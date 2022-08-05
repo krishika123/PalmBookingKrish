@@ -9,6 +9,7 @@ const Layout = (props) => {
   return (
     <>
         <div>
+          <Header />
           <SmallHeader/>
         </div>
 

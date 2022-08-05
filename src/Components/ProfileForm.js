@@ -1,18 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 import { useParams } from "react-router-dom";
 import axios from "../api/axios";
+import TableComponent from "./TableComponent";
+
+const session_url = "oidc.user:https://palmbookingkrish.com:ebookkeeping-pwa";
+const session = JSON.parse(sessionStorage.getItem(session_url));
+console.log(session)
+const user = session?.profile?.email || "your email";
+const id = session?.profile?.sub || "your id";
 
 const initData = {
   name: "",
   email: "",
-  bookingId: ""
 };
 
 const ProfileForm = (props) => {
-  const { id } = useParams();
 
   const [userInfo, setUserInfo] = useState(initData);
+  const [userBookings, setUserBookings] = useState([]);
 
   const renderResponse = (data) => {
     //console.log({data: facilities.find(x => x.name === data.facilityName)?.id, facilities})
@@ -27,17 +33,37 @@ const ProfileForm = (props) => {
     }));
   };
 
+
   const getUserInfo = async () => {
     try {
       const response = await axios.get(`/User/GetUserBy${id}`);
-      //console.log({response2222: renderResponse(response.data[0])})
-      renderResponse(response.data[0]);
+      setUserInfo(response.data)
     } catch (error) {
       console.error({ response: error });
     }
   };
 
-  getUserInfo();
+  const getUserBookings = async () => {
+    try {
+      const response = await axios.get(`/Booking/GetBookingsByEmail${user}`);
+      setUserBookings(response.data)
+      console.log(response)
+    } catch (error) {
+      console.error({ response: error });
+    }
+  };
+
+ 
+
+  useEffect(() => {
+    getUserBookings();
+    getUserInfo();
+  
+    return () => {
+      
+    }
+  }, [])
+  
 
   return (
     <div>
@@ -65,8 +91,10 @@ const ProfileForm = (props) => {
         </FormGroup>
       </Form>
 
-      <h7>Bookings:</h7>
-      <p>table for bookings</p>
+      <h3> User Bookings </h3>
+      
+      <TableComponent data={userBookings}/>
+
     </div>
   );
 };

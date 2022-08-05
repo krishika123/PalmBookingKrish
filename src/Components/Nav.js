@@ -3,7 +3,6 @@ import profileicon from "./profileicon.png";
 import { Outlet, Link } from "react-router-dom";
 import styledComponents from "styled-components";
 import { login, logout } from "../service/authservice";
-import Modal from "@mui/material/Modal";
 
 const session_url = "oidc.user:https://palmbookingkrish.com:ebookkeeping-pwa";
 const session = JSON.parse(sessionStorage.getItem(session_url));
@@ -77,9 +76,6 @@ const styles = {
 const Nav = ({ inputElement }) => {
   const [show, setShow] = useState(false);
   const [auth, setAuth] = useState(null);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     if (auth === null) {

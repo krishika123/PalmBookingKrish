@@ -11,7 +11,7 @@ const Content = () => {
 
 const Header = () => {
   return (
-    <header>
+    <header className="HeaderClass">
       <Content/>
       <Nav/>
       <nav></nav>

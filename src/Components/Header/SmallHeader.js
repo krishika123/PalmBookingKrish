@@ -36,7 +36,7 @@ const SmallHeader = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
   return (
-    <header>
+    <header className='SmallHeaderClass'>
         <div style={styles.headerSpacingStyle}>
             <div>
                 <Content/> 
@@ -44,10 +44,10 @@ const SmallHeader = () => {
             <div>
                 <img onClick={handleOpen} style={styles.menuStyle} src={hammenu} alt="Hamburger menu button"></img>
                 <Modal
-                     open={open}
-                     onClose={handleClose}
-                    //  aria-labelledby="parent-modal-title"
-                    //  aria-describedby="parent-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="parent-modal-title"
+                    aria-describedby="parent-modal-description"
                 >
                     <SideBar/>
                 </Modal>

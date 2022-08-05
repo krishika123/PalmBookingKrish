@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useParams  } from 'react-router-dom';
+import {useNavigate , useParams  } from 'react-router-dom';
 import {Form,FormGroup,Label,Input,Button} from 'reactstrap';
-//  import axios from 'axios';
-  import axios from '../api/axios';
+import SweetAlert from 'react-bootstrap-sweetalert';
+import axios from '../api/axios';
+import LoadingOverlay from 'react-loading-overlay';
 
 
 const initData ={
@@ -23,10 +24,12 @@ const styles={
 const BookingForm = (props) => {
     const {id} = useParams()
     //console.log({id})
+    const navigate = useNavigate();
     const [bookingInfo, setBookingInfo] = useState(initData);
     const [facilities, setFacilities] = useState([]);
     const [selectedFacility, setselectedFacility] = useState('')
-   
+    const [showAlert, setShowAlert] = useState(false)
+    const [isActive, setIsActive] = useState(false)
     
 
     const renderResponse = (data) =>{
@@ -56,12 +59,26 @@ const BookingForm = (props) => {
 
     const postBookingInfo = async()=>{
         try {
-            const response = await axios.post(`/Booking/CreateBooking`, bookingInfo)
-            console.log({response})
+            const response = await axios.post(`/Booking/CreateBooking`, {...bookingInfo})
+            setShowAlert(true)
+            setIsActive(false)
+      
         } catch (error) {
-            console.error({response:error})
+            console.log({response:error})
+            setIsActive(false)
         }
-}
+    }
+    const UpdateBookingInfo = async()=>{
+        try {
+            const response = await axios.post(`/Booking/UpdateBookingBy${id}`, {...bookingInfo})
+             //setShowAlert(true)
+             //setIsActive(false)
+      
+        } catch (error) {
+            console.log({response:error})
+            //setIsActive(false)
+        }
+    }
 
     const getFacilities = async() => {
         try{
@@ -77,26 +94,31 @@ const BookingForm = (props) => {
    
     const submitData = (e) =>{
         e.preventDefault()
-
-
-        // console.log({bookingInfo})
-          //bookingInfo?.bookingname ?   console.log({objData}):alert("just add your name")
-        //    bookingInfo.date.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Valid Date.")
-        //    bookingInfo.time.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Valid Time.")
-        //    bookingInfo.hall.length > 0 ?   console.log({bookingInfo}) : alert("Please Pick A Facility.")
-
-           postBookingInfo()
+           if(id){
+            UpdateBookingInfo()
+           }else{
+            postBookingInfo()
+           }
            
     }
-    
+    const onConfirm = ()=>{
+
+        setShowAlert(false)
+      
+        navigate("/profile", { replace: true });
+      
+      }
+      const onCancel =()=>{
+      
+      }
 
     useEffect(() => {
 
-        // if(id){
-        //     getFacilities()
+        if(id){
+            getBookingInfo()
           
-        // }
-        getFacilities()
+        }
+        
       
       return () => {
         
@@ -105,14 +127,13 @@ const BookingForm = (props) => {
 
 
     useEffect(() => {
-        console.log({bookingInfo, facilities})
-        console.log("SelectedFacility:", selectedFacility)
-        
-    }, [selectedFacility])
+        getFacilities()
+    }, [])
     
 
 
     return (
+    <LoadingOverlay active={isActive} spinner text='Loading your content...'>
     <div>
         <Form>
         <FormGroup>
@@ -146,15 +167,22 @@ const BookingForm = (props) => {
             <Label for="exampleSelect">
                 Select a Hall or Conference Room
             </Label>
-            {/* <Input
+            <Input
                 id="exampleSelect"
                 name="facilityId"
                 placeholder={bookingInfo?.facilityName}
-                type="text"
-                // value={bookingInfo?.facilityName}
+                type="select"
+                value={bookingInfo?.facilityId}
                 onChange={handleChange}
-            /> */}
-            <Input
+            >
+            <option>
+                Choose a Hall from the List
+            </option>
+            {
+                facilities.map(facility => <option key={facility.id} value={facility.id} defaultValue={selectedFacility == facility.facilityName ? true : false}>{facility.name}</option> )
+            }
+            </Input>
+            {/* <Input
                 id="exampleSelect"
                 name="facilityId"
                 type="select"
@@ -167,7 +195,7 @@ const BookingForm = (props) => {
             {
                 facilities.map(facility => <option key={facility.id} value={facility.id} defaultValue={selectedFacility == facility.facilityName ? true : false}>{facility.name}</option> )
             }
-            </Input>
+            </Input> */}
         </FormGroup>
         <FormGroup>
             <Label for="exampleText">
@@ -185,8 +213,12 @@ const BookingForm = (props) => {
         <Button type='submit' style={styles.Button} onClick={submitData} >
             Submit
         </Button>
-        </Form>
+        <SweetAlert show={showAlert} success title="Your booking has been made!" onConfirm={onConfirm} onCancel={onCancel}>
+        </SweetAlert>
+    </Form>
     </div>
+    </LoadingOverlay>
+    
     )
 }
  export default BookingForm
